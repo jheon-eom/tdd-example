@@ -36,8 +36,8 @@ public class PasswordMeterTest {
     @DisplayName("길이가 8 미만, 그 외 조건은 충족")
     void digitAndUppercase() {
         assertPasswordStrength("abcC123", PasswordStrength.NORMAL);
-        assertPasswordStrength("aaaa123", PasswordStrength.NORMAL);
-        assertPasswordStrength("a123das", PasswordStrength.NORMAL);
+        assertPasswordStrength("aaaD123", PasswordStrength.NORMAL);
+        assertPasswordStrength("a123dDs", PasswordStrength.NORMAL);
     }
 
     @Test
@@ -62,7 +62,19 @@ public class PasswordMeterTest {
     @Test
     @DisplayName("대문자만 충족")
     void upperCase() {
-        assertPasswordStrength("ASDFVXCc", PasswordStrength.WEAK);
+        assertPasswordStrength("ASDFVXC", PasswordStrength.WEAK);
+    }
+
+    @Test
+    @DisplayName("숫자만 충족")
+    void digit() {
+        assertPasswordStrength("123sadf", PasswordStrength.WEAK);
+    }
+
+    @Test
+    @DisplayName("아무것도 충족하지 않음")
+    void nothing() {
+        assertPasswordStrength("dd", PasswordStrength.WEAK);
     }
 
     void assertPasswordStrength(String password, PasswordStrength expected) {

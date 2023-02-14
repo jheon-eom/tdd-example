@@ -6,25 +6,35 @@ public class PasswordMeter {
         if (pw == null || pw.isEmpty()) {
             throw new IllegalArgumentException();
         }
-        boolean lengthRule = pw.length() >= 8;
-        boolean containsUpperCase = isContainsUppercase(pw);
-        boolean containsDigit = containsDigit(pw);
-        if (lengthRule && !containsUpperCase && !containsDigit) {
+        int metCount = 0;
+        metCount = calculateMetCount(pw, metCount);
+        if (metCount <= 1) {
             return PasswordStrength.WEAK;
         }
-        if (!lengthRule) {
-            return PasswordStrength.NORMAL;
-        }
-        if (!containsUpperCase) {
-            return PasswordStrength.NORMAL;
-        }
-        if (!containsDigit) {
+        if (metCount == 2) {
             return PasswordStrength.NORMAL;
         }
         return PasswordStrength.STRONG;
     }
 
-    private boolean isContainsUppercase(String pw) {
+    private int calculateMetCount(String pw, int metCount) {
+        if (meetLength(pw)) {
+            metCount++;
+        }
+        if (containsUppercase(pw)) {
+            metCount++;
+        }
+        if (containsDigit(pw)) {
+            metCount++;
+        }
+        return metCount;
+    }
+
+    private boolean meetLength(String pw) {
+        return pw.length() >= 8;
+    }
+
+    private boolean containsUppercase(String pw) {
         for (char ch : pw.toCharArray()) {
             if (ch >= 'A' && ch <= 'Z') {
                 return true;
