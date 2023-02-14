@@ -1,5 +1,7 @@
 package com.study.tdd;
 
+import com.study.tdd.testdemo.PasswordMeter;
+import com.study.tdd.testdemo.PasswordStrength;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package com.study.tdd;
+package com.study.tdd.testdemo;
 
 public enum PasswordStrength {
     NORMAL,
